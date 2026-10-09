@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About drafts v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap">
+<style>
+  :root {
+    --slate: #455663;
+    --cream: #fffdf0;
+    --ink: #2b2b2b;
+    --hair-dark: rgba(0, 0, 0, 0.14);
+    --hair-light: rgba(255, 255, 255, 0.22);
+    --pad: clamp(1.25rem, 5vw, 5rem);
+    --ease: cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "EB Garamond", Georgia, serif; color: var(--ink); background: var(--cream); }
+  img { display: block; }
+  p { margin: 0; font-size: clamp(1.05rem, 1.25vw, 1.2rem); line-height: 1.55; }
+  em { font-style: italic; }
+
+  .nav { position: sticky; top: 0; z-index: 20; display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0.75rem var(--pad); background: rgba(255, 253, 240, 0.92); backdrop-filter: blur(6px); border-bottom: 1px solid var(--hair-dark); font-size: 0.95rem; }
+  .nav a { color: inherit; text-decoration: none; padding: 0.5rem 0.9rem; border: 1px solid var(--hair-dark); border-radius: 100vmax; }
+  .label { padding: 1.5rem var(--pad) 0.5rem; font-size: 0.95rem; }
+  .label b { font-weight: 500; }
+  .label span { opacity: 0.7; }
+  .dark { background: var(--slate); color: #fff; }
+
+  /* ── 1 · Every season ─────────────────────────────────────
+     The sentence is the layout. "season" cycles winter → spring → summer → autumn,
+     and the photo quietly changes with it. */
+  .s1 { display: grid; grid-template-columns: 1fr minmax(16rem, 28vw); align-items: center; gap: clamp(2rem, 6vw, 6rem); padding: clamp(5rem, 10vw, 9rem) var(--pad); }
+  .s1-line { font-size: clamp(2.6rem, 6.4vw, 6.5rem); line-height: 1; font-weight: 400; margin: 0; letter-spacing: -0.01em; }
+  .s1-cycle { display: inline-grid; height: 1.08em; overflow: hidden; vertical-align: bottom; }
+  .s1-cycle > span { grid-area: 1 / 1; font-style: italic; animation: s1-word 16s var(--ease) infinite; translate: 0 110%; }
+  .s1-cycle > span:nth-child(2) { animation-delay: 4s; }
+  .s1-cycle > span:nth-child(3) { animation-delay: 8s; }
+  .s1-cycle > span:nth-child(4) { animation-delay: 12s; }
+  @keyframes s1-word { 0% { translate: 0 110%; } 5%, 22% { translate: 0 0; } 27%, 100% { translate: 0 -110%; } }
+  .s1-foot { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: clamp(2.5rem, 5vw, 4rem); padding-top: 1.5rem; border-top: 1px solid var(--hair-dark); max-width: 52rem; }
+  .s1-foot p:first-child { font-style: italic; opacity: 0.7; }
+  .s1-photo { position: relative; aspect-ratio: 3 / 4; overflow: hidden; }
+  .s1-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; animation: s1-photo 16s linear infinite; }
+  .s1-photo img:nth-child(2) { animation-delay: 4s; }
+  .s1-photo img:nth-child(3) { animation-delay: 8s; }
+  .s1-photo img:nth-child(4) { animation-delay: 12s; }
+  @keyframes s1-photo { 0% { opacity: 0; } 5%, 25% { opacity: 1; } 30%, 100% { opacity: 0; } }
+
+  /* ── 2 · Breathe ──────────────────────────────────────────
+     One ring that breathes at a calming 5s in / 5s out pace.
+     The section itself becomes a tiny grounding exercise. */
+  .s2 { min-height: 100svh; display: grid; place-items: center; padding: clamp(5rem, 10vw, 9rem) var(--pad); overflow: hidden; text-align: center; }
+  .s2-stage { position: relative; width: min(42rem, 88vw); aspect-ratio: 1; display: grid; place-items: center; }
+  .s2-ring { position: absolute; inset: 0; border: 1px solid var(--hair-light); border-radius: 50%; animation: s2-breathe 10s ease-in-out infinite; }
+  .s2-ring::after { content: ""; position: absolute; inset: 14%; border-radius: 50%; background: rgba(255, 255, 255, 0.04); }
+  @keyframes s2-breathe { 0%, 100% { scale: 0.82; } 50% { scale: 1; } }
+  .s2-copy { position: relative; max-width: 24ch; }
+  .s2-copy h2 { font-weight: 400; font-size: clamp(2rem, 3.6vw, 3.3rem); line-height: 1.12; margin: 0; }
+  .s2-cue { display: block; margin-top: 1.25rem; font-style: italic; font-size: 1rem; opacity: 0.7; }
+  .s2-cue span { animation: s2-cue 10s ease-in-out infinite; }
+  .s2-cue span + span { animation-delay: -5s; }
+  .s2-cue span { display: inline-block; }
+  @keyframes s2-cue { 0%, 45% { opacity: 1; } 50%, 95% { opacity: 0.25; } 100% { opacity: 1; } }
+  .s2-mission { max-width: 40ch; margin: clamp(2.5rem, 5vw, 4rem) auto 0; opacity: 0.85; }
+
+  /* ── 3 · Beside you ───────────────────────────────────────
+     Two narrow portraits travel at different speeds on scroll, like two people walking
+     side by side. Text walks between them. (Scroll-driven; static where unsupported.) */
+  .s3 { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: clamp(1.5rem, 4vw, 4rem); align-items: center; padding: clamp(6rem, 12vw, 11rem) var(--pad); }
+  .s3-img { width: 100%; aspect-ratio: 2 / 3; object-fit: cover; }
+  .s3-left { animation: s3-up linear both; animation-timeline: view(); animation-range: cover; }
+  .s3-right { animation: s3-down linear both; animation-timeline: view(); animation-range: cover; }
+  @keyframes s3-up { from { translate: 0 12%; } to { translate: 0 -12%; } }
+  @keyframes s3-down { from { translate: 0 -6%; } to { translate: 0 18%; } }
+  .s3-copy { text-align: center; }
+  .s3-copy h2 { font-weight: 400; font-size: clamp(2rem, 3.4vw, 3.4rem); line-height: 1.1; margin: 0; }
+  .s3-copy h2 em { display: block; }
+  .s3-copy p { margin-top: 1.75rem; opacity: 0.8; }
+
+  /* ── 4 · A seat for you ──────────────────────────────────
+     Round photo inside a ring of slowly turning text — the original circles idea,
+     but the circle carries the message instead of decorating it. */
+  .s4 { display: grid; grid-template-columns: auto 1fr; gap: clamp(3rem, 8vw, 8rem); align-items: center; padding: clamp(6rem, 12vw, 10rem) var(--pad); }
+  .s4-orbit { position: relative; width: clamp(18rem, 34vw, 30rem); aspect-ratio: 1; }
+  .s4-orbit svg { position: absolute; inset: 0; width: 100%; height: 100%; animation: s4-turn 60s linear infinite; overflow: visible; }
+  .s4-orbit text { fill: #fff; font-size: 7.4px; letter-spacing: 0.32em; text-transform: uppercase; }
+  .s4-orbit img { position: absolute; inset: 15%; width: 70%; height: 70%; border-radius: 50%; object-fit: cover; }
+  @keyframes s4-turn { to { rotate: 360deg; } }
+  .s4-copy h2 { font-weight: 400; font-size: clamp(2.2rem, 4.2vw, 4rem); line-height: 1.05; margin: 0; max-width: 14ch; }
+  .s4-copy p { margin-top: 2rem; max-width: 38ch; opacity: 0.85; }
+  .s4-sign { margin-top: 2.5rem; font-style: italic; font-size: 1.4rem; }
+
+  /* ── 5 · Written like a letter ───────────────────────────
+     No images competing: the headline steps down the page like a handwritten note,
+     one small photo sits in the margin. Restraint as the creative move. */
+  .s5 { padding: clamp(6rem, 12vw, 11rem) var(--pad); }
+  .s5-lines { font-size: clamp(2.2rem, 5.2vw, 5.2rem); line-height: 1.08; font-weight: 400; margin: 0; }
+  .s5-lines span { display: block; }
+  .s5-lines span:nth-child(2) { padding-left: 8vw; }
+  .s5-lines span:nth-child(3) { padding-left: 16vw; font-style: italic; }
+  .s5-lines span:nth-child(4) { padding-left: 24vw; }
+  .s5-row { display: grid; grid-template-columns: 24vw 1fr; gap: 2rem; margin-top: clamp(3rem, 6vw, 5rem); align-items: start; }
+  .s5-thumb { width: clamp(6rem, 10vw, 9rem); aspect-ratio: 3 / 4; object-fit: cover; }
+  .s5-row p { max-width: 40ch; }
+  .s5-row p + p { margin-top: 1.25rem; font-style: italic; opacity: 0.65; }
+
+  @media (max-width: 860px) {
+    .s1, .s4 { grid-template-columns: 1fr; }
+    .s1-photo { max-width: 22rem; }
+    .s1-foot { grid-template-columns: 1fr; }
+    .s3 { grid-template-columns: 1fr 1fr; }
+    .s3-copy { grid-column: 1 / -1; grid-row: 1; }
+    .s5-lines span:nth-child(n) { padding-left: 0; }
+    .s5-row { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; }
+    .s1-cycle > span:first-child, .s1-photo img:first-child { translate: 0 0; opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Drafts">
+  <a href="#d1">1 · Every season</a>
+  <a href="#d2">2 · Breathe</a>
+  <a href="#d3">3 · Beside you</a>
+  <a href="#d4">4 · A seat for you</a>
+  <a href="#d5">5 · Like a letter</a>
+</nav>
+
+<div class="label" id="d1"><b>1 · Every season</b> <span>— the sentence is the layout; “season” cycles winter → spring → summer → autumn and the photo changes with it.</span></div>
+<section class="s1">
+  <div>
+    <h2 class="s1-line">Walking beside you<br>through every<br><span class="s1-cycle" aria-label="season"><span>winter.</span><span>spring.</span><span>summer.</span><span>autumn.</span></span></h2>
+    <div class="s1-foot">
+      <p>Compassionate counselors for every season of your life.</p>
+      <p>We believe everyone deserves a safe, supportive space to share their story, and care that helps you build resilience and find balance again.</p>
+    </div>
+  </div>
+  <div class="s1-photo">
+    <img src="https://picsum.photos/id/1036/700/930" alt="">
+    <img src="https://picsum.photos/id/1047/700/930" alt="">
+    <img src="https://picsum.photos/id/1027/700/930" alt="">
+    <img src="https://picsum.photos/id/1039/700/930" alt="">
+  </div>
+</section>
+
+<div class="label" id="d2"><b>2 · Breathe</b> <span>— one ring breathing at 5s in / 5s out; the section becomes a small grounding moment instead of a sales pitch.</span></div>
+<section class="s2 dark">
+  <div>
+    <div class="s2-stage">
+      <div class="s2-ring" aria-hidden="true"></div>
+      <div class="s2-copy">
+        <h2>Compassionate counselors, beside you in every season of life.</h2>
+        <span class="s2-cue" aria-hidden="true"><span>breathe in</span> · <span>breathe out</span></span>
+      </div>
+    </div>
+    <p class="s2-mission">We believe everyone deserves a safe and supportive space to share their story, and professional care that helps you navigate life’s challenges, build resilience, and find your way back to balance.</p>
+  </div>
+</section>
+
+<div class="label" id="d3"><b>3 · Beside you</b> <span>— two portraits drift at different speeds on scroll, like two people walking together; the text walks between them.</span></div>
+<section class="s3">
+  <img class="s3-img s3-left" src="https://picsum.photos/id/1027/600/900" alt="">
+  <div class="s3-copy">
+    <h2>We don’t lead from the front. <em>We walk beside you.</em></h2>
+    <p>Compassionate, professional care through every season of your life. At your pace, in your words, toward balance and healing.</p>
+  </div>
+  <img class="s3-img s3-right" src="https://picsum.photos/id/1012/600/900" alt="">
+</section>
+
+<div class="label" id="d4"><b>4 · A seat for you</b> <span>— keeps your circles, but the ring carries the message: text slowly orbiting a single portrait.</span></div>
+<section class="s4 dark">
+  <div class="s4-orbit">
+    <svg viewBox="0 0 200 200" aria-hidden="true">
+      <defs><path id="orbit" d="M100,100 m-92,0 a92,92 0 1,1 184,0 a92,92 0 1,1 -184,0"/></defs>
+      <text><textPath href="#orbit">every season of your life · beside you · every season of your life · beside you ·</textPath></text>
+    </svg>
+    <img src="https://picsum.photos/id/1027/700/700" alt="">
+  </div>
+  <div class="s4-copy">
+    <h2>There’s a seat here for <em>you.</em></h2>
+    <p>We believe everyone deserves a safe and supportive space to share their story. Compassionate counselors, walking beside you through every season of your life.</p>
+    <p class="s4-sign">— Marisa</p>
+  </div>
+</section>
+
+<div class="label" id="d5"><b>5 · Like a letter</b> <span>— no decoration; the headline steps down the page like a handwritten note, one small photo in the margin.</span></div>
+<section class="s5">
+  <h2 class="s5-lines">
+    <span>Compassionate counselors</span>
+    <span>walking beside you</span>
+    <span>through every season</span>
+    <span>of your life.</span>
+  </h2>
+  <div class="s5-row">
+    <img class="s5-thumb" src="https://picsum.photos/id/1027/400/530" alt="">
+    <div>
+      <p>We believe everyone deserves a safe and supportive space to share their story. Our care helps you navigate life’s challenges, build resilience, and find a path toward balance and healing.</p>
+      <p>Whenever you’re ready, we’re here.</p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

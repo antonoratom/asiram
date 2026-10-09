@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About section drafts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap">
+<style>
+  :root {
+    --slate: #455663;
+    --slate-dark: #34424d;
+    --cream: #fffdf0;
+    --ink: #2b2b2b;
+    --line-light: rgba(255, 255, 255, 0.18);
+    --line-dark: rgba(0, 0, 0, 0.12);
+    --pad: clamp(1.25rem, 5vw, 5rem);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "EB Garamond", Georgia, serif; color: var(--ink); background: var(--cream); }
+  img { display: block; max-width: 100%; }
+  h2 { font-weight: 400; font-size: clamp(2rem, 3.6vw, 3.25rem); line-height: 1.1; margin: 0; text-wrap: balance; }
+  p { margin: 0; font-size: clamp(1.05rem, 1.3vw, 1.25rem); line-height: 1.55; }
+  .eyebrow { font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.75; }
+
+  /* draft chrome */
+  .nav { position: sticky; top: 0; z-index: 10; display: flex; gap: 0.5rem; flex-wrap: wrap; padding: 0.75rem var(--pad); background: rgba(255,253,240,0.92); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line-dark); font-size: 0.95rem; }
+  .nav a { color: inherit; text-decoration: none; padding: 0.5rem 0.9rem; border: 1px solid var(--line-dark); border-radius: 100vmax; }
+  .label { padding: 1.5rem var(--pad) 0.5rem; font-size: 0.95rem; }
+  .label b { font-weight: 500; }
+  .label span { opacity: 0.7; }
+  .draft { padding: clamp(4rem, 9vw, 8rem) var(--pad); }
+  .wrap { max-width: 1200px; margin: 0 auto; }
+  .dark { background: var(--slate); color: #fff; }
+
+  /* A — split with arched portrait + three values */
+  .a-grid { display: grid; grid-template-columns: 5fr 6fr; gap: clamp(2rem, 6vw, 6rem); align-items: center; }
+  .a-img { aspect-ratio: 4 / 5; object-fit: cover; width: 100%; border-radius: 999px 999px 0 0; }
+  .a-copy { display: flex; flex-direction: column; gap: 1.5rem; }
+  .a-values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 1rem; padding-top: 2rem; border-top: 1px solid var(--line-light); }
+  .a-values h3 { font-weight: 400; font-size: 1.35rem; margin: 0 0 0.35rem; }
+  .a-values p { font-size: 1rem; opacity: 0.8; }
+
+  /* B — centred statement with inline image + stats */
+  .b { text-align: center; }
+  .b h2 { max-width: 22ch; margin: 1.25rem auto 0; font-size: clamp(2.2rem, 4.4vw, 4rem); }
+  .b-pill { display: inline-block; width: 2.4em; height: 1.1em; vertical-align: -0.12em; border-radius: 100vmax; object-fit: cover; margin: 0 0.1em; }
+  .b p { max-width: 46ch; margin: 2rem auto 0; opacity: 0.85; }
+  .b-stats { display: grid; grid-template-columns: repeat(3, 1fr); max-width: 52rem; margin: 4rem auto 0; border-top: 1px solid var(--line-dark); }
+  .b-stats div { padding: 1.75rem 1rem 0; }
+  .b-stats div + div { border-left: 1px solid var(--line-dark); }
+  .b-stats strong { display: block; font-weight: 400; font-size: clamp(2rem, 3vw, 2.75rem); line-height: 1; }
+  .b-stats span { display: block; margin-top: 0.5rem; font-size: 0.95rem; opacity: 0.7; }
+
+  /* C — editorial: text + numbered principles, tall image */
+  .c-grid { display: grid; grid-template-columns: 6fr 5fr; gap: clamp(2rem, 6vw, 6rem); align-items: stretch; }
+  .c-copy { display: flex; flex-direction: column; gap: 1.5rem; }
+  .c-list { list-style: none; margin: 1.5rem 0 0; padding: 0; border-top: 1px solid var(--line-light); }
+  .c-list li { display: grid; grid-template-columns: 3rem 1fr; gap: 1rem; padding: 1.25rem 0; border-bottom: 1px solid var(--line-light); }
+  .c-list .num { font-size: 0.95rem; opacity: 0.6; padding-top: 0.3rem; }
+  .c-list h3 { margin: 0 0 0.25rem; font-weight: 400; font-size: 1.4rem; }
+  .c-list p { font-size: 1rem; opacity: 0.8; }
+  .c-img { width: 100%; height: 100%; min-height: 28rem; object-fit: cover; }
+
+  /* D — offset collage + floating note */
+  .d-grid { display: grid; grid-template-columns: 6fr 5fr; gap: clamp(2rem, 6vw, 6rem); align-items: center; }
+  .d-collage { position: relative; aspect-ratio: 1 / 1; }
+  .d-collage img { position: absolute; object-fit: cover; }
+  .d-main { left: 0; top: 0; width: 72%; height: 78%; }
+  .d-second { right: 0; bottom: 0; width: 48%; height: 55%; border: 0.5rem solid var(--cream); }
+  .d-note { position: absolute; left: 6%; bottom: 4%; background: var(--slate); color: #fff; padding: 1.25rem 1.5rem; max-width: 15rem; }
+  .d-note strong { display: block; font-weight: 400; font-size: 2.25rem; line-height: 1; }
+  .d-note span { font-size: 0.95rem; opacity: 0.85; }
+  .d-copy { display: flex; flex-direction: column; gap: 1.5rem; }
+  .d-sign { display: flex; align-items: center; gap: 1rem; margin-top: 0.5rem; }
+  .d-sign img { width: 3.5rem; height: 3.5rem; border-radius: 50%; object-fit: cover; }
+  .d-sign p { font-size: 1rem; }
+  .d-sign span { display: block; opacity: 0.65; font-size: 0.9rem; }
+
+  /* E — refined rings: one image, one ring, quiet facts on the ring */
+  .e { position: relative; overflow: hidden; text-align: center; }
+  .e-ring { position: absolute; left: 50%; top: clamp(4rem, 9vw, 8rem); width: min(70rem, 140vw); aspect-ratio: 1; translate: -50% 0; border: 1px solid var(--line-light); border-radius: 50%; pointer-events: none; }
+  .e-inner { position: relative; display: flex; flex-direction: column; align-items: center; gap: 1.75rem; }
+  .e-img { width: clamp(11rem, 20vw, 16rem); aspect-ratio: 1; border-radius: 50%; object-fit: cover; }
+  .e h2 { max-width: 20ch; }
+  .e p { max-width: 46ch; opacity: 0.85; }
+  .e-facts { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin-top: 0.5rem; }
+  .e-facts span { padding: 0.5rem 1rem; border: 1px solid var(--line-light); border-radius: 100vmax; font-size: 0.95rem; }
+
+  @media (max-width: 860px) {
+    .a-grid, .c-grid, .d-grid { grid-template-columns: 1fr; }
+    .a-values { grid-template-columns: 1fr; }
+    .b-stats { grid-template-columns: 1fr; }
+    .b-stats div + div { border-left: 0; border-top: 1px solid var(--line-dark); margin-top: 1.5rem; }
+    .c-img { min-height: 20rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Drafts">
+  <a href="#a">A · Split + values</a>
+  <a href="#b">B · Statement + stats</a>
+  <a href="#c">C · Editorial principles</a>
+  <a href="#d">D · Collage + note</a>
+  <a href="#e">E · Refined ring</a>
+</nav>
+
+<!-- A -->
+<div class="label" id="a"><b>A · Split with arched portrait + three values</b> <span>— calm and easy to scan; values replace the badges. Maps to: row › col-lg-5 / col-lg-6, card-free.</span></div>
+<section class="draft dark">
+  <div class="wrap a-grid">
+    <img class="a-img" src="https://picsum.photos/id/1027/800/1000" alt="">
+    <div class="a-copy">
+      <span class="eyebrow">Our approach</span>
+      <h2>Compassionate counselors walking beside you through every season of your life</h2>
+      <p>We believe everyone deserves a safe and supportive space to share their story. Our mission is to provide compassionate, professional care that helps you navigate life’s challenges, build resilience, and find a path toward balance and healing.</p>
+      <div class="a-values">
+        <div><h3>Listen</h3><p>Unhurried sessions where you set the pace.</p></div>
+        <div><h3>Understand</h3><p>Care shaped around your history and goals.</p></div>
+        <div><h3>Grow</h3><p>Practical tools you keep using after therapy.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- B -->
+<div class="label" id="b"><b>B · Centred statement with inline image + stats</b> <span>— most editorial; the photo lives inside the headline. Stats are proof the hero doesn’t already state.</span></div>
+<section class="draft b">
+  <div class="wrap">
+    <span class="eyebrow">About us</span>
+    <h2>Compassionate counselors <img class="b-pill" src="https://picsum.photos/id/1027/300/140" alt=""> walking beside you through every season <img class="b-pill" src="https://picsum.photos/id/1011/300/140" alt=""> of your life</h2>
+    <p>We believe everyone deserves a safe and supportive space to share their story — and the care to navigate life’s challenges, build resilience, and find balance.</p>
+    <div class="b-stats">
+      <div><strong>10+</strong><span>Years of experience</span></div>
+      <div><strong>2,000+</strong><span>Sessions held</span></div>
+      <div><strong>In person &amp; online</strong><span>Whichever feels right</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- C -->
+<div class="label" id="c"><b>C · Editorial with numbered principles</b> <span>— explains how care works; strongest for trust. Image stretches to the text height.</span></div>
+<section class="draft dark">
+  <div class="wrap c-grid">
+    <div class="c-copy">
+      <span class="eyebrow">Our approach</span>
+      <h2>Compassionate counselors walking beside you through every season of your life</h2>
+      <p>We believe everyone deserves a safe and supportive space to share their story.</p>
+      <ol class="c-list">
+        <li><span class="num">01</span><div><h3>A safe space first</h3><p>No judgement, no rush — trust comes before techniques.</p></div></li>
+        <li><span class="num">02</span><div><h3>Care built around you</h3><p>Your history, goals and pace shape every plan.</p></div></li>
+        <li><span class="num">03</span><div><h3>Whole-person healing</h3><p>Mind, relationships and daily life, not just symptoms.</p></div></li>
+      </ol>
+    </div>
+    <img class="c-img" src="https://picsum.photos/id/1011/900/1200" alt="">
+  </div>
+</section>
+
+<!-- D -->
+<div class="label" id="d"><b>D · Offset collage with floating note</b> <span>— warmest and most personal; a signature line puts a face to the practice.</span></div>
+<section class="draft">
+  <div class="wrap d-grid">
+    <div class="d-collage">
+      <img class="d-main" src="https://picsum.photos/id/1027/900/900" alt="">
+      <img class="d-second" src="https://picsum.photos/id/1015/700/700" alt="">
+      <div class="d-note"><strong>10+</strong><span>years helping adults and couples feel more like themselves</span></div>
+    </div>
+    <div class="d-copy">
+      <span class="eyebrow">About the practice</span>
+      <h2>Compassionate counselors walking beside you through every season of your life</h2>
+      <p>We believe everyone deserves a safe and supportive space to share their story. Our mission is to provide compassionate, professional care that helps you navigate life’s challenges, build resilience, and find balance.</p>
+      <div class="d-sign">
+        <img src="https://picsum.photos/id/64/200/200" alt="">
+        <p>Marisa Hoskins<span>Founder &amp; lead clinician</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- E -->
+<div class="label" id="e"><b>E · Refined version of the original rings</b> <span>— keeps the circular idea but with one ring, no overlapping text, and facts as quiet tags.</span></div>
+<section class="draft dark e">
+  <div class="e-ring" aria-hidden="true"></div>
+  <div class="wrap e-inner">
+    <img class="e-img" src="https://picsum.photos/id/1027/600/600" alt="">
+    <h2>Compassionate counselors walking beside you through every season of your life</h2>
+    <p>We believe everyone deserves a safe and supportive space to share their story, and the care to navigate life’s challenges with resilience and balance.</p>
+    <div class="e-facts"><span>10+ years of experience</span><span>Adults &amp; couples</span><span>In person &amp; online</span></div>
+  </div>
+</section>
+
+</body>
+</html>

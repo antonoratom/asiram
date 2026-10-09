@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About draft v4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap">
+<style>
+  :root {
+    --bg: #405864;
+    --text: #fff;
+    --muted: rgba(255, 255, 255, 0.72);
+    --ring: rgba(255, 255, 255, 0.16);
+    --pad: clamp(1.25rem, 5vw, 5rem);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "EB Garamond", Georgia, serif; background: #fffdf0; }
+  img { display: block; }
+
+  /* ── section ─────────────────────────────────────────────── */
+  .people {
+    position: relative;
+    overflow: hidden;
+    min-height: min(100svh, 52rem);
+    display: flex;
+    align-items: center;
+    padding: clamp(5rem, 10vw, 9rem) var(--pad);
+    background: var(--bg);
+    color: var(--text);
+    --r1: clamp(12rem, 19vw, 18rem);   /* inner ring radius */
+    --r2: clamp(20rem, 32vw, 30rem);   /* outer ring radius */
+    --rot: 0deg;                       /* 0deg: avatars on the left arc · 90deg: on the top arc */
+  }
+  .people-copy { position: relative; z-index: 1; max-width: 32rem; display: flex; flex-direction: column; gap: 1.5rem; }
+  .people-copy h2 { margin: 0; font-weight: 400; font-size: clamp(2.2rem, 3.6vw, 3.4rem); line-height: 1.1; text-wrap: balance; }
+  .people-copy p { margin: 0; font-size: clamp(1.05rem, 1.25vw, 1.2rem); line-height: 1.55; color: var(--muted); }
+
+  /* ── orbits: centre sits on the right edge, so only the left half shows ── */
+  .orbits {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 0;
+    height: 0;
+  }
+  .ring {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: calc(var(--r) * 2);
+    aspect-ratio: 1;
+    translate: -50% -50%;
+    border: 1px solid var(--ring);
+    border-radius: 50%;
+  }
+  .ring.r1 { --r: var(--r1); }
+  .ring.r2 { --r: var(--r2); }
+
+  /* each avatar rides an arm rotated to --a (0deg = top, 270deg = far left),
+     swaying ±--sway around it; the photo counter-rotates to stay upright */
+  .arm {
+    --sway: 7deg;
+    position: absolute;
+    inset: 0;
+    rotate: calc(var(--a) + var(--rot));
+    animation: sway var(--t, 14s) ease-in-out var(--d, 0s) infinite alternate;
+  }
+  .arm img {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: calc(var(--s) * var(--k, 1));   /* --k scales every avatar per breakpoint */
+    aspect-ratio: 1;
+    translate: -50% -50%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 0.25rem solid var(--bg);
+    rotate: calc((var(--a) + var(--rot)) * -1);
+    animation: upright var(--t, 14s) ease-in-out var(--d, 0s) infinite alternate;
+  }
+  @keyframes sway    { from { rotate: calc(var(--a) + var(--rot) - var(--sway)); }        to { rotate: calc(var(--a) + var(--rot) + var(--sway)); } }
+  @keyframes upright { from { rotate: calc((var(--a) + var(--rot) - var(--sway)) * -1); } to { rotate: calc((var(--a) + var(--rot) + var(--sway)) * -1); } }
+
+  @media (max-width: 860px) {
+    .people {
+      --r1: 6.5rem;
+      --r2: 10.5rem;
+      --rot: 90deg;
+      min-height: 0;
+      align-items: flex-start;
+      padding-bottom: calc(var(--r2) + 4rem);   /* room for the visible top half + avatars */
+    }
+    .orbits { top: auto; bottom: 0; right: auto; left: 50%; }
+    .arm { --k: 0.6; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .arm, .arm img { animation: none; }
+  }
+
+  /* ── version labels ─────────────────────────────────────── */
+  .label { padding: 1.25rem var(--pad); font-size: 0.95rem; color: #2b2b2b; }
+  .label b { font-weight: 500; }
+  .label span { opacity: 0.65; }
+
+  /* ── Version B · stacked: people circle → body → 10+ years ── */
+  .stack {
+    --photo: clamp(13rem, 22vw, 19rem);
+    --top: clamp(5rem, 9vw, 8rem);
+    position: relative;
+    overflow: hidden;
+    padding: var(--top) var(--pad);
+    background: var(--bg);
+    color: var(--text);
+    text-align: center;
+  }
+  /* background rings as in the original: concentric, centred on the section.
+     Outer = full section height (touches top and bottom), inner = half of it. */
+  .stack-ring {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: calc(100% * var(--x));
+    aspect-ratio: 1;
+    translate: -50% -50%;
+    border: 1px solid var(--ring);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .stack-photo { position: relative; width: var(--photo); aspect-ratio: 1; margin: 0 auto; border-radius: 50%; object-fit: cover; }
+  .stack-copy { position: relative; max-width: 40rem; margin: clamp(2.5rem, 4vw, 3.5rem) auto 0; display: flex; flex-direction: column; gap: 1.5rem; }
+  .stack-copy h2 { margin: 0; font-weight: 400; font-size: clamp(2.1rem, 3.4vw, 3.2rem); line-height: 1.12; text-wrap: balance; }
+  .stack-copy p { margin: 0; font-size: clamp(1.05rem, 1.25vw, 1.2rem); line-height: 1.6; color: var(--muted); }
+  .stack-badge {
+    position: relative;
+    display: grid;
+    place-content: center;
+    padding: 0.75rem;
+    text-align: center;
+    width: clamp(8.5rem, 11vw, 10rem);
+    aspect-ratio: 1;
+    margin: clamp(2.5rem, 5vw, 4rem) auto 0;
+    border: 1px solid var(--ring);
+    border-radius: 50%;
+    background: var(--bg);
+  }
+  .stack-badge strong { font-weight: 400; font-size: clamp(2.2rem, 3vw, 2.75rem); line-height: 1; }
+  .stack-badge span { margin-top: 0.35rem; font-size: 0.9rem; line-height: 1.25; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<div class="label"><b>Version A · Orbits</b> <span>— text left, half-rings on the right edge</span></div>
+<section class="people">
+  <div class="people-copy">
+    <h2>Compassionate counselors walking beside you through every season of your life</h2>
+    <p>We believe everyone deserves a safe and supportive space to share their story. Our mission is to provide compassionate, professional care that helps individuals navigate life’s challenges, build resilience, and discover a path toward balance and healing.</p>
+  </div>
+
+  <div class="orbits" aria-hidden="true">
+    <!-- inner ring: small → large, top to bottom -->
+    <div class="ring r1">
+      <div class="arm" style="--a: 316deg; --s: 3rem; --t: 12s;"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80" alt=""></div>
+      <div class="arm" style="--a: 272deg; --s: 4.75rem; --t: 15s; --d: -5s;"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&q=80" alt=""></div>
+      <div class="arm" style="--a: 226deg; --s: 6.5rem; --t: 13s; --d: -9s;"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&q=80" alt=""></div>
+    </div>
+    <!-- outer ring: large, small, medium -->
+    <div class="ring r2">
+      <div class="arm" style="--a: 302deg; --s: 8.5rem; --t: 18s; --d: -3s;"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80" alt=""></div>
+      <div class="arm" style="--a: 262deg; --s: 3.75rem; --t: 14s; --d: -10s;"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80" alt=""></div>
+      <div class="arm" style="--a: 228deg; --s: 6rem; --t: 17s; --d: -7s;"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&q=80" alt=""></div>
+    </div>
+  </div>
+</section>
+
+<div class="label"><b>Version B · Stacked</b> <span>— people circle on top, body in the middle, one “10+ years” circle at the bottom</span></div>
+<section class="stack">
+  <div class="stack-ring" style="--x: 0.5" aria-hidden="true"></div>
+  <div class="stack-ring" style="--x: 1" aria-hidden="true"></div>
+  <img class="stack-photo" src="images/counselor-session.webp" alt="Counselor in conversation with a client">
+  <div class="stack-copy">
+    <h2>Compassionate counselors walking beside you through every season of your life</h2>
+    <p>We believe everyone deserves a safe and supportive space to share their story. Our mission is to provide compassionate, professional care that helps individuals navigate life’s challenges, build resilience, and discover a path toward balance and healing.</p>
+  </div>
+  <div class="stack-badge"><strong>10+</strong><span>Years of<br>experience</span></div>
+</section>
+
+</body>
+</html>

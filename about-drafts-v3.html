@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About drafts v3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap">
+<style>
+  :root {
+    --slate: #455663;
+    --cream: #fffdf0;
+    --ink: #2b2b2b;
+    --muted: rgba(43, 43, 43, 0.68);
+    --hair: rgba(0, 0, 0, 0.12);
+    --radius: 1.25rem;
+    --pad: clamp(1.25rem, 5vw, 5rem);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "EB Garamond", Georgia, serif; color: var(--ink); background: var(--cream); }
+  img { display: block; max-width: 100%; }
+  h2 { margin: 0; font-weight: 400; font-size: clamp(2.2rem, 4vw, 3.6rem); line-height: 1.08; text-wrap: balance; }
+  h3 { margin: 0; font-weight: 500; font-size: 1.2rem; }
+  p { margin: 0; font-size: clamp(1.05rem, 1.25vw, 1.2rem); line-height: 1.55; }
+
+  .nav { position: sticky; top: 0; z-index: 20; display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0.75rem var(--pad); background: rgba(255, 253, 240, 0.92); backdrop-filter: blur(6px); border-bottom: 1px solid var(--hair); font-size: 0.95rem; }
+  .nav a { color: inherit; text-decoration: none; padding: 0.5rem 0.9rem; border: 1px solid var(--hair); border-radius: 100vmax; }
+  .label { padding: 1.5rem var(--pad) 0.5rem; font-size: 0.95rem; }
+  .label b { font-weight: 500; }
+  .label span { color: var(--muted); }
+  .section { padding: clamp(5rem, 10vw, 9rem) var(--pad); }
+  .wrap { max-width: 1240px; margin: 0 auto; }
+  .muted { color: var(--muted); }
+
+  /* ── A · The people beside you ───────────────────────────── */
+  .a { display: grid; grid-template-columns: 4fr 7fr; gap: clamp(2.5rem, 6vw, 6rem); align-items: start; }
+  .a-intro { position: sticky; top: 6rem; display: flex; flex-direction: column; gap: 1.5rem; }
+  .a-team { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2vw, 1.75rem); }
+  .a-person:nth-child(2) { margin-top: 4rem; }
+  .a-person img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: var(--radius); }
+  .a-person h3 { margin-top: 1rem; }
+  .a-person .role { font-size: 0.95rem; }
+  .a-person q { display: block; margin-top: 0.75rem; font-style: italic; font-size: 1.05rem; quotes: "“" "”"; }
+
+  /* ── B · A room where you can breathe ────────────────────── */
+  .b-photo { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; object-position: center 25%; border-radius: var(--radius); }
+  .b-row { display: grid; grid-template-columns: 6fr 5fr; gap: clamp(2rem, 6vw, 6rem); margin-top: clamp(2.5rem, 5vw, 4rem); }
+  .b-copy { display: flex; flex-direction: column; gap: 1.5rem; }
+  .b-promises { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--hair); }
+  .b-promises li { display: flex; gap: 1rem; align-items: baseline; padding: 1.1rem 0; border-bottom: 1px solid var(--hair); font-size: 1.2rem; }
+  .b-promises li span { color: var(--muted); font-size: 0.95rem; min-width: 1.5rem; }
+
+  /* ── C · Real people, here to listen ─────────────────────── */
+  .c { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1.75rem; }
+  .c-faces { display: flex; justify-content: center; }
+  .c-faces img { width: clamp(4.5rem, 9vw, 7.5rem); aspect-ratio: 1; object-fit: cover; border-radius: 50%; border: 0.3rem solid var(--cream); }
+  .c-faces img + img { margin-left: -1.1rem; }
+  .c h2 { max-width: 18ch; }
+  .c p { max-width: 44ch; }
+  .c-quote { margin-top: 1rem; padding-top: 2rem; border-top: 1px solid var(--hair); max-width: 36rem; }
+  .c-quote q { display: block; font-style: italic; font-size: clamp(1.25rem, 1.8vw, 1.6rem); line-height: 1.4; quotes: "“" "”"; }
+  .c-quote span { display: block; margin-top: 0.75rem; font-size: 0.95rem; }
+
+  @media (max-width: 900px) {
+    .a, .b-row { grid-template-columns: 1fr; }
+    .a-intro { position: static; }
+    .b-photo { aspect-ratio: 4 / 3; }
+  }
+  @media (max-width: 560px) {
+    .a-team { grid-template-columns: 1fr 1fr; }
+    .a-person:nth-child(2) { margin-top: 2rem; }
+    .a-person:nth-child(3) { grid-column: 1 / -1; max-width: 50%; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Drafts">
+  <a href="#a">A · The people beside you</a>
+  <a href="#b">B · A room to breathe</a>
+  <a href="#c">C · Here to listen</a>
+</nav>
+
+<div class="label" id="a"><b>A · The people beside you</b> <span>— trust through faces: the counselors, each with one personal line in their own words.</span></div>
+<section class="section">
+  <div class="wrap a">
+    <div class="a-intro">
+      <h2>The people beside you</h2>
+      <p>We believe everyone deserves a safe and supportive space to share their story. Our counselors are chosen as much for how they listen as for what they know.</p>
+      <p class="muted">Every season of your life, the same familiar faces.</p>
+    </div>
+    <div class="a-team">
+      <article class="a-person">
+        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=700&q=80" alt="">
+        <h3>Marisa Hoskins</h3>
+        <p class="role muted">Founder · Psychiatric care</p>
+        <q>I’ll always listen before I suggest anything.</q>
+      </article>
+      <article class="a-person">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=700&q=80" alt="">
+        <h3>Daniel Reyes</h3>
+        <p class="role muted">Couples &amp; family</p>
+        <q>There’s no wrong place to start.</q>
+      </article>
+      <article class="a-person">
+        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=700&q=80" alt="">
+        <h3>Anna Kovacs</h3>
+        <p class="role muted">Anxiety &amp; life transitions</p>
+        <q>You set the pace. Always.</q>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="label" id="b"><b>B · A room where you can breathe</b> <span>— the safe space, shown literally: one warm session photo, then three plain promises.</span></div>
+<section class="section">
+  <div class="wrap">
+    <img class="b-photo" src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=1600&q=80" alt="">
+    <div class="b-row">
+      <div class="b-copy">
+        <h2>A safe space to be heard, without judgement.</h2>
+        <p class="muted">Compassionate counselors walking beside you through every season of your life, helping you build resilience and find balance again.</p>
+      </div>
+      <ul class="b-promises">
+        <li><span>01</span>You set the pace.</li>
+        <li><span>02</span>What you share stays in the room.</li>
+        <li><span>03</span>You’re a person here, never a case.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="label" id="c"><b>C · Real people, here to listen</b> <span>— the simplest: a cluster of faces, one sentence, one voice from someone who’s been there.</span></div>
+<section class="section">
+  <div class="wrap c">
+    <div class="c-faces">
+      <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&q=80" alt="">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&q=80" alt="">
+      <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&q=80" alt="">
+      <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&q=80" alt="">
+      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&q=80" alt="">
+    </div>
+    <h2>Real people, here to listen.</h2>
+    <p class="muted">We believe everyone deserves a safe and supportive space to share their story, and someone beside them through every season of life.</p>
+    <div class="c-quote">
+      <q>For the first time, I didn’t feel like I had to explain myself.</q>
+      <span class="muted">A client, after her first month</span>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
